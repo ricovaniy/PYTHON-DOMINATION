@@ -1,0 +1,53 @@
+class Queue{
+    field int size;
+    field LinkedList head;
+    field LinkedList tail;
+    constructor Queue new(int x, int y){
+        let size = 1;
+        let head = LinkedList.new(x,y);
+        let tail = head;
+        return this;
+    }
+
+    method int GetSize(){
+        return size;
+    }
+
+    method LinkedList Pop(){
+        var LinkedList next;
+        var LinkedList returned;
+        let next = head.GetNext();
+        let returned = LinkedList.new(head.GetX(), head.GetY());
+        do Memory.deAlloc(head);
+        let size = size - 1;
+        let head = next;
+        return returned;
+    }
+
+    method void Push(int x, int y){
+        var LinkedList new;
+        let new = LinkedList.new(x, y);
+        do tail.SetNext(new);
+        let tail = new;
+        let size = size + 1;
+        return;
+    }
+
+    method boolean Contain(int x, int y){
+        var LinkedList cur;
+        let cur = head;
+        while (~(cur = null)){
+            if ((cur.GetX() = x) & (cur.GetY() = y)){
+                return true;
+            }
+            let cur = cur.GetNext();
+        }
+        return false;
+    }
+    
+    method void dispose(){
+        do head.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+}

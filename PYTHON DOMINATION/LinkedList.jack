@@ -1,0 +1,31 @@
+class LinkedList{
+    field int x;
+    field int y;
+    field LinkedList next;
+    constructor LinkedList new(int x1, int y1){
+        let x = x1;
+        let y = y1;
+        let next = null;
+        return this;
+    }
+    method int GetX(){
+        return x;
+    }
+    method int GetY(){
+        return y;
+    }
+    method int GetNext(){
+        return next;
+    }
+    method void SetNext(LinkedList n){
+        let next = n;
+        return;
+    }
+    method void dispose(){
+        if (~(next = null)){
+            do next.dispose();
+        }
+        do Memory.deAlloc(this);
+        return;
+    }
+}

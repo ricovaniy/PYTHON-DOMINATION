@@ -1,0 +1,72 @@
+class Python{
+    field int x;
+    field int y;
+    field int direction;
+    field int length;
+    field int size;
+    field Queue elements;
+    constructor Python new (int x1, int y1, int Asize){
+        let x = x1;
+        let y = y1;
+        let direction = 132;
+        let length = 1;
+        let size = Asize;
+        let elements = Queue.new(x,y);
+        do DrawSegment(true, x, y);
+        return this;
+    }
+
+    method void DrawSegment(boolean color, int x, int y){
+        do Screen.setColor(color);
+        do Screen.drawRectangle(x, y, x + size -1, y + size -1);
+        return;
+    }
+
+    method void DecrementLength(){
+        let length = length - 1;
+        return;
+    }
+
+    method void incrementLength(){
+        let length = length + 1;
+        return;
+    }
+    
+    method void SetDirection(int dir){
+        let direction = dir;
+        return;
+    }
+
+    method void Draw(){
+        var LinkedList tail;
+        do elements.Push(x,y);
+        while(length<elements.GetSize()){
+            let tail = elements.Pop();
+            do DrawSegment(false, tail.GetX(), tail.GetY());
+        }
+        do DrawSegment(true, x, y);
+        return;
+    }
+
+    method boolean EatFood(Food f){
+        return (~(x<(f.GetX()-16)) & ~(x>f.GetX())) & (~(y<(f.GetY()-16)) & ~(y>f.GetY()));
+    }
+
+    method boolean Crashed(){
+        return ((x < 0) | (x > 509) | (y < 0) | (y > 254) | (elements.Contain(x,y)));
+    }
+    
+    method void Move(){
+        if (direction = 130) {let x = x - size;} // move LEFT
+        if (direction = 131) {let y = y - size;} // move DOWN
+        if (direction = 132) {let x = x + size;} // move RIGHT
+        if (direction = 133) {let y = y + size;} // move UP
+        return;
+    }
+
+    method void dispose(){
+        do elements.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+}

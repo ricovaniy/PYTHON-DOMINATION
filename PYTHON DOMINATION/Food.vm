@@ -1,0 +1,875 @@
+function Food.new 0
+push constant 6
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+pop this 1
+push argument 2
+pop this 2
+push constant 5
+call Random.Range 1
+pop this 3
+push pointer 0
+call Food.Draw 1
+pop temp 0
+push pointer 0
+return
+function Food.GetX 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Food.GetY 0
+push argument 0
+pop pointer 0
+push this 1
+return
+function Food.GetType 0
+push argument 0
+pop pointer 0
+push this 3
+return
+function Food.Place 0
+push argument 0
+pop pointer 0
+push pointer 0
+push this 1
+push constant 32
+call Math.multiply 2
+push this 0
+push constant 16
+call Math.divide 2
+add
+call Food.Clear 2
+pop temp 0
+push constant 16
+push constant 31
+call Random.Range 1
+call Math.multiply 2
+pop this 0
+push constant 16
+push constant 15
+call Random.Range 1
+call Math.multiply 2
+pop this 1
+label WHILE_EXP0
+push this 0
+push constant 16
+call Math.divide 2
+push this 1
+push constant 32
+call Math.multiply 2
+add
+push constant 16384
+add
+call Memory.peek 1
+not
+if-goto WHILE_END0
+push constant 16
+push constant 31
+call Random.Range 1
+call Math.multiply 2
+pop this 0
+push constant 16
+push constant 15
+call Random.Range 1
+call Math.multiply 2
+pop this 1
+goto WHILE_EXP0
+label WHILE_END0
+push constant 5
+call Random.Range 1
+pop this 3
+push pointer 0
+call Food.Draw 1
+pop temp 0
+push constant 0
+return
+function Food.Draw 0
+push argument 0
+pop pointer 0
+push this 1
+push constant 32
+call Math.multiply 2
+push this 0
+push constant 16
+call Math.divide 2
+add
+pop this 5
+push this 3
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+push this 5
+call Food.drawCPP 2
+pop temp 0
+label IF_FALSE0
+push this 3
+push constant 1
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+push this 5
+call Food.drawC 2
+pop temp 0
+label IF_FALSE1
+push this 3
+push constant 2
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push pointer 0
+push this 5
+call Food.drawCSH 2
+pop temp 0
+label IF_FALSE2
+push this 3
+push constant 3
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push pointer 0
+push this 5
+call Food.drawJS 2
+pop temp 0
+label IF_FALSE3
+push this 3
+push constant 4
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push pointer 0
+push this 5
+call Food.drawRUST 2
+pop temp 0
+label IF_FALSE4
+push constant 0
+return
+function Food.drawCPP 0
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop this 4
+push this 4
+push constant 0
+add
+push constant 1
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 32
+add
+push constant 32767
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 64
+add
+push constant 32767
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 96
+add
+push constant 32655
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 128
+add
+push constant 32519
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 160
+add
+push constant 28531
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 192
+add
+push constant 18419
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 224
+add
+push constant 28147
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 256
+add
+push constant 30963
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 288
+add
+push constant 32243
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 320
+add
+push constant 32627
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 352
+add
+push constant 32519
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 384
+add
+push constant 32655
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 416
+add
+push constant 32767
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 448
+add
+push constant 32767
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 480
+add
+push constant 1
+neg
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Food.drawC 0
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop this 4
+push this 4
+push constant 0
+add
+push constant 1
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 32
+add
+push constant 32767
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 64
+add
+push constant 32767
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 96
+add
+push constant 31807
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 128
+add
+push constant 30751
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 160
+add
+push constant 29647
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 192
+add
+push constant 32719
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 224
+add
+push constant 32719
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 256
+add
+push constant 32719
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 288
+add
+push constant 32719
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 320
+add
+push constant 29647
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 352
+add
+push constant 30751
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 384
+add
+push constant 31807
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 416
+add
+push constant 32767
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 448
+add
+push constant 32767
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 480
+add
+push constant 1
+neg
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Food.drawCSH 0
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop this 4
+push this 4
+push constant 0
+add
+push constant 1
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 32
+add
+push constant 32767
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 64
+add
+push constant 32527
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 96
+add
+push constant 32263
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 128
+add
+push constant 31987
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 160
+add
+push constant 32755
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 192
+add
+push constant 27635
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 224
+add
+push constant 16883
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 256
+add
+push constant 27635
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 288
+add
+push constant 16883
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 320
+add
+push constant 27635
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 352
+add
+push constant 31987
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 384
+add
+push constant 32263
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 416
+add
+push constant 32527
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 448
+add
+push constant 32767
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 480
+add
+push constant 1
+neg
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Food.drawRUST 0
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop this 4
+push this 4
+push constant 0
+add
+push constant 1
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 32
+add
+push constant 32767
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 64
+add
+push constant 32711
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 96
+add
+push constant 31751
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 128
+add
+push constant 30735
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 160
+add
+push constant 29647
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 192
+add
+push constant 29647
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 224
+add
+push constant 29647
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 256
+add
+push constant 30735
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 288
+add
+push constant 31759
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 320
+add
+push constant 20943
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 352
+add
+push constant 17359
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 384
+add
+push constant 18311
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 416
+add
+push constant 26503
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 448
+add
+push constant 32767
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 480
+add
+push constant 1
+neg
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Food.drawJS 0
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop this 4
+push this 4
+push constant 0
+add
+push constant 1
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 32
+add
+push constant 32767
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 64
+add
+push constant 32767
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 96
+add
+push constant 32703
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 128
+add
+push constant 32703
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 160
+add
+push constant 17343
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 192
+add
+push constant 32191
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 224
+add
+push constant 32191
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 256
+add
+push constant 32191
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 288
+add
+push constant 25535
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 320
+add
+push constant 24511
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 352
+add
+push constant 24507
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 384
+add
+push constant 24451
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 416
+add
+push constant 25031
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 448
+add
+push constant 32767
+neg
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 480
+add
+push constant 1
+neg
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Food.Clear 0
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop this 4
+push this 4
+push constant 0
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 32
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 64
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 96
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 128
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 160
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 192
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 224
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 256
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 288
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 320
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 352
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 384
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 416
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 448
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 4
+push constant 480
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Food.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return

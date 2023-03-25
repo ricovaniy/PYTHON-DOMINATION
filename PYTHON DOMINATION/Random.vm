@@ -1,0 +1,52 @@
+function Random.SetSeed 0
+push constant 11035
+pop static 0
+push constant 12345
+pop static 1
+push constant 32767
+pop static 2
+push argument 0
+pop static 3
+push constant 0
+return
+function Random.random 1
+push static 0
+push static 3
+call Math.multiply 2
+push static 1
+add
+push static 2
+call Random.mod 2
+pop local 0
+push local 0
+pop static 3
+push local 0
+return
+function Random.Range 0
+call Random.random 0
+push argument 0
+call Random.mod 2
+return
+function Random.mod 1
+push argument 0
+push argument 0
+push argument 1
+call Math.divide 2
+push argument 1
+call Math.multiply 2
+sub
+pop local 0
+push local 0
+push constant 0
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+push constant 1
+neg
+call Math.multiply 2
+pop local 0
+label IF_FALSE0
+push local 0
+return

@@ -1,0 +1,97 @@
+class PythonGame{
+    field Python python;
+    field Food food1;
+    field Food food2;
+    field int score;
+    field int scoreInc;
+    field int time;
+
+    constructor PythonGame new(){
+        let python = Python.new(0,0,16);
+        let food1 = Food.new(128,128,16);
+        let food2 = Food.new(64,64,16);
+        let score = 0;
+        let scoreInc = 50;
+        let time = 120;
+        return this;
+    }
+
+    method void Run(){
+        var char key;
+        var boolean exit;
+        let exit = false;
+        while(~exit){
+            let key = Keyboard.keyPressed();
+            do python.Move();
+            if (~(python.Crashed()) & ~((key = 81))){
+                if ((key>129) & (key < 134)){
+                    do python.SetDirection(key);
+                }
+                if (python.EatFood(food1)){
+                    let score = score + Math.max(5, scoreInc);
+                    let scoreInc = 50;
+                    if (food1.GetType() = 0){let time = time - 10;}
+                    if (food1.GetType() = 1){do python.incrementLength();}
+                    if (food1.GetType() = 2){
+                        let score = score + 100;
+                        do python.incrementLength();
+                        do python.incrementLength();
+                    }
+                    if (food1.GetType() = 3){
+                        let score = score -50;
+                    }
+                    if (food1.GetType() = 4){
+                        let time = time + 10;
+                        do python.incrementLength();
+                    }
+                    if (food1.GetType() = 5){
+                        let score = score + 50;
+                        do python.incrementLength();
+                    }
+                    do food1.Place();
+                    do food2.Place();
+                }
+                if (python.EatFood(food2)){
+                    let score = score + Math.max(5, scoreInc);
+                    let scoreInc = 50;
+                    if (food2.GetType() = 0){let time = time - 10;}
+                    if (food2.GetType() = 1){do python.incrementLength();}
+                    if (food2.GetType() = 2){
+                        let score = score + 100;
+                        do python.incrementLength();
+                        do python.incrementLength();
+                    }
+                    if (food2.GetType() = 3){
+                        let score = score -50;
+                    }
+                    if (food2.GetType() = 4){
+                        let time = time + 10;
+                        do python.incrementLength();
+                    }
+                    if (food2.GetType() = 5){
+                        let score = score + 50;
+                        do python.incrementLength();
+                    }
+                    do food1.Place();
+                    do food2.Place();
+                }
+                let scoreInc = scoreInc - 1;
+                do python.Draw();
+                do Sys.wait(time);
+            }
+            else{
+                let exit = true;
+            }
+        }
+        do Output.moveCursor(11,26);
+        do Output.printString("SCORE:");
+        do Output.printInt(score);
+        return;
+    }
+
+    method void dispose(){
+        do python.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+}
