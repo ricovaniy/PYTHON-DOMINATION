@@ -2,6 +2,7 @@ class Python{
     field int x;
     field int y;
     field int direction;
+    field int prevDirection;
     field int length;
     field int size;
     field Queue elements;
@@ -9,6 +10,7 @@ class Python{
         let x = x1; // Set start X
         let y = y1; // Set start Y
         let direction = 132; // Set start direction (RIGHT)
+        let prevDirection = 0;
         let length = 1; // Set start length
         let size = Asize; // Set size of blocks
         let elements = Queue.new(x,y); // Initialize body
@@ -53,14 +55,38 @@ class Python{
     }
 
     method boolean Crashed(){ // Collision detection with map borders
-        return ((x < 0) | (x > 509) | (y < 0) | (y > 254) | (elements.Contain(x,y)));
+        return ((x < 0) | (x > 509) | (y < 16) | (y > 238) | (elements.Contain(x,y)));
     }
     
     method void Move(){ // Move.
-        if (direction = 130) {let x = x - size;} // move LEFT
-        if (direction = 131) {let y = y - size;} // move DOWN
-        if (direction = 132) {let x = x + size;} // move RIGHT
-        if (direction = 133) {let y = y + size;} // move UP
+        if (direction = 130) {
+            if (~(prevDirection = 132) | (length = 1)){
+                let x = x - size;
+                let prevDirection = 130;
+            }
+            else {let x = x + size;}
+        } // move LEFT
+        if (direction = 131) {
+            if (~(prevDirection = 133) | (length = 1)){
+                let y = y - size;
+                let prevDirection = 131;
+            }
+            else {let y = y + size;}
+        } // move DOWN
+        if (direction = 132) {
+            if (~(prevDirection = 130) | (length = 1)){
+                let x = x + size;
+                let prevDirection = 132;
+            }
+            else { let x = x - size;}
+        } // move RIGHT
+        if (direction = 133) {
+            if (~(prevDirection = 131) | (length = 1)){
+                let y = y + size;
+                let prevDirection = 133;
+            }
+            else {let y = y - size;}
+        } // move UP
         return;
     }
 

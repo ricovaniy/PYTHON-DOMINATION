@@ -5,14 +5,28 @@ class PythonGame{
     field int score;
     field int scoreInc;
     field int time;
+    field int sharp;
+    field int cpp;
+    field int c;
+    field int rust;
+    field int go;
+    field int js;
 
     constructor PythonGame new(){
-        let python = Python.new(0,0,16);
+        let python = Python.new(256,128,16);
         let food1 = Food.new(128,128,16);
         let food2 = Food.new(64,64,16);
         let score = 0;
         let scoreInc = 50;
         let time = 120; // Frame duration in ms
+        let sharp = 0;
+        let cpp = 0;
+        let c = 0;
+        let rust = 0;
+        let go = 0;
+        let js=0;
+        do PrintStatistics();
+        do DrawPlaceForScore();
         return this;
     }
 
@@ -32,6 +46,7 @@ class PythonGame{
                     let scoreInc = 50;
                     do GetBuffs(food1);
                     // Spawn new food after any of previous ones are destroyed
+                    do RefreshScore();
                     do food1.Place();
                     do food2.Place();
                 }
@@ -39,6 +54,7 @@ class PythonGame{
                     let score = score + Math.max(5, scoreInc);
                     let scoreInc = 50;
                     do GetBuffs(food2);
+                    do RefreshScore();
                     do food1.Place();
                     do food2.Place();
                 }
@@ -50,38 +66,139 @@ class PythonGame{
                 let exit = true;
             }
         }
-        do Output.moveCursor(11,26); // Move cursor to the center
-        // Print final score
-        do Output.printString("SCORE:"); 
-        do Output.printInt(score);
+        do Output.moveCursor(11,26);
+        do Output.printString("GAME OVER!!!");
         return;
     }
 
     method void dispose(){
         do python.dispose();
+        do food1.dispose();
+        do food2.dispose();
         do Memory.deAlloc(this);
         return;
     }
 
     method void GetBuffs(Food food){
-        if (food1.GetType() = 0){let time = time - 10;} // C++  increases python speed
-        if (food1.GetType() = 1){do python.incrementLength();} // C adds 1 segment to body
-        if (food1.GetType() = 2){ // C# adds 2 segments to body and 100 score points
+        if (food.GetType() = 0){
+            let time = time - 10;
+            do RefreshCPP();
+        } // C++  increases python speed
+        if (food.GetType() = 1){
+            do python.incrementLength();
+            do RefreshC();
+        } // C adds 1 segment to body
+        if (food.GetType() = 2){ // C# adds 2 segments to body and 100 score points
             let score = score + 100;
             do python.incrementLength();
             do python.incrementLength();
+            do RefreshSharp();
         }
-        if (food1.GetType() = 3){ // JS decreases score by 50
+        if (food.GetType() = 3){ // JS decreases score by 50
             let score = score -50;
+            do RefreshJs();
         }
-        if (food1.GetType() = 4){ // Rust slows python down and adds 1 body segment
+        if (food.GetType() = 4){ // Rust slows python down and adds 1 body segment
             let time = time + 10;
             do python.incrementLength();
+            do RefreshRust();
         }
-        if (food1.GetType() = 5){ // GO adds 50 score points and 1 body segment
+        if (food.GetType() = 5){ // GO adds 50 score points and 1 body segment
             let score = score + 50;
             do python.incrementLength();
+            do RefreshGO();
         }        
+        return;
+    }
+
+    method void DrawPlaceForScore(){
+        var int memAddress;
+        var int i;
+        let i = 0;
+        let memAddress = 16384 + 480;
+        while (i<32){
+            do Memory.poke(memAddress + i, 32767);
+            let i = i+1;
+        }
+        let memAddress = 16384+7680;
+        let i = 0;
+        while (i<32){
+            do Memory.poke(memAddress+i,32767);
+            let i = i + 1;
+        }
+        return;
+    }
+
+    method void RefreshScore(){
+        do Output.moveCursor(0,32);
+        do Output.printInt(score);
+        return;
+    }
+
+    method void PrintStatistics(){
+        do Output.moveCursor(0,26);
+        do Output.printString("SCORE:");
+        do Output.printInt(score);
+        do Output.moveCursor(22,0);
+        do Output.printString("RUST:");
+        do Output.printInt(rust);
+        do Output.moveCursor(22,10);
+        do Output.printString("C#:");
+        do Output.printInt(sharp);
+        do Output.moveCursor(22,20);
+        do Output.printString("C++:");
+        do Output.printInt(cpp);
+        do Output.moveCursor(22,30);
+        do Output.printString("C:");
+        do Output.printInt(c);
+        do Output.moveCursor(22,40);
+        do Output.printString("GO:");
+        do Output.printInt(go);
+        do Output.moveCursor(22,50);
+        do Output.printString("JS:");
+        do Output.printInt(js);
+        return;
+    }
+
+    method void RefreshRust(){
+        let rust = rust + 1;
+        do Output.moveCursor(22,5);
+        do Output.printInt(rust);
+        return;
+    }
+
+    method void RefreshSharp(){
+        let sharp = sharp + 1;
+        do Output.moveCursor(22,13);
+        do Output.printInt(sharp);
+        return;
+    }
+
+    method void RefreshCPP(){
+        let cpp = cpp + 1;
+        do Output.moveCursor(22,24);
+        do Output.printInt(cpp);
+        return;
+    }
+
+    method void RefreshC(){
+        let c = c + 1;
+        do Output.moveCursor(22,32);
+        do Output.printInt(c);
+        return;
+    }
+
+    method void RefreshGO(){
+        let go = go + 1;
+        do Output.moveCursor(22,43);
+        do Output.printInt(go);
+        return;
+    }
+
+    method void RefreshJs(){
+        let js = js + 1;
+        do Output.moveCursor(22,53);
+        do Output.printInt(js);
         return;
     }
 }

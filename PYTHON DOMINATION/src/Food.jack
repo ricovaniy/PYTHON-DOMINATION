@@ -29,10 +29,10 @@ class Food{
     method void Place(){ // Food spawn
         do Clear((y * 32) + (x / 16));
         let x = (16 * Random.Range(31));
-        let y = 16 * Random.Range(15);
+        let y = 16 * Random.Range(14)+16;
         while (Memory.peek((x/16)+(y*32)+16384)){ // Make sure food doesn't spawn inside player or other food
             let x = (16 * Random.Range(31));
-            let y = 16 * Random.Range(15);
+            let y = 16 * Random.Range(14)+16;
         }
         let type = Random.Range(6);
         do Draw();

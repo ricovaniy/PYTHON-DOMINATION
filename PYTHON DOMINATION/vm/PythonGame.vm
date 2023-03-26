@@ -1,9 +1,9 @@
 function PythonGame.new 0
-push constant 6
+push constant 12
 call Memory.alloc 1
 pop pointer 0
-push constant 0
-push constant 0
+push constant 256
+push constant 128
 push constant 16
 call Python.new 3
 pop this 0
@@ -23,6 +23,24 @@ push constant 50
 pop this 4
 push constant 120
 pop this 5
+push constant 0
+pop this 6
+push constant 0
+pop this 7
+push constant 0
+pop this 8
+push constant 0
+pop this 9
+push constant 0
+pop this 10
+push constant 0
+pop this 11
+push pointer 0
+call PythonGame.PrintStatistics 1
+pop temp 0
+push pointer 0
+call PythonGame.DrawPlaceForScore 1
+pop temp 0
 push pointer 0
 return
 function PythonGame.Run 2
@@ -84,6 +102,9 @@ push pointer 0
 push this 1
 call PythonGame.GetBuffs 2
 pop temp 0
+push pointer 0
+call PythonGame.RefreshScore 1
+pop temp 0
 push this 1
 call Food.Place 1
 pop temp 0
@@ -108,6 +129,9 @@ pop this 4
 push pointer 0
 push this 2
 call PythonGame.GetBuffs 2
+pop temp 0
+push pointer 0
+call PythonGame.RefreshScore 1
 pop temp 0
 push this 1
 call Food.Place 1
@@ -138,6 +162,231 @@ push constant 11
 push constant 26
 call Output.moveCursor 2
 pop temp 0
+push constant 12
+call String.new 1
+push constant 71
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 77
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 86
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 0
+return
+function PythonGame.dispose 0
+push argument 0
+pop pointer 0
+push this 0
+call Python.dispose 1
+pop temp 0
+push this 1
+call Food.dispose 1
+pop temp 0
+push this 2
+call Food.dispose 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function PythonGame.GetBuffs 0
+push argument 0
+pop pointer 0
+push argument 1
+call Food.GetType 1
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 5
+push constant 10
+sub
+pop this 5
+push pointer 0
+call PythonGame.RefreshCPP 1
+pop temp 0
+label IF_FALSE0
+push argument 1
+call Food.GetType 1
+push constant 1
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 0
+call Python.incrementLength 1
+pop temp 0
+push pointer 0
+call PythonGame.RefreshC 1
+pop temp 0
+label IF_FALSE1
+push argument 1
+call Food.GetType 1
+push constant 2
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 3
+push constant 100
+add
+pop this 3
+push this 0
+call Python.incrementLength 1
+pop temp 0
+push this 0
+call Python.incrementLength 1
+pop temp 0
+push pointer 0
+call PythonGame.RefreshSharp 1
+pop temp 0
+label IF_FALSE2
+push argument 1
+call Food.GetType 1
+push constant 3
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push this 3
+push constant 50
+sub
+pop this 3
+push pointer 0
+call PythonGame.RefreshJs 1
+pop temp 0
+label IF_FALSE3
+push argument 1
+call Food.GetType 1
+push constant 4
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push this 5
+push constant 10
+add
+pop this 5
+push this 0
+call Python.incrementLength 1
+pop temp 0
+push pointer 0
+call PythonGame.RefreshRust 1
+pop temp 0
+label IF_FALSE4
+push argument 1
+call Food.GetType 1
+push constant 5
+eq
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push this 3
+push constant 50
+add
+pop this 3
+push this 0
+call Python.incrementLength 1
+pop temp 0
+push pointer 0
+call PythonGame.RefreshGO 1
+pop temp 0
+label IF_FALSE5
+push constant 0
+return
+function PythonGame.DrawPlaceForScore 2
+push argument 0
+pop pointer 0
+push constant 0
+pop local 1
+push constant 16384
+push constant 480
+add
+pop local 0
+label WHILE_EXP0
+push local 1
+push constant 32
+lt
+not
+if-goto WHILE_END0
+push local 0
+push local 1
+add
+push constant 32767
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push constant 16384
+push constant 7680
+add
+pop local 0
+push constant 0
+pop local 1
+label WHILE_EXP1
+push local 1
+push constant 32
+lt
+not
+if-goto WHILE_END1
+push local 0
+push local 1
+add
+push constant 32767
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP1
+label WHILE_END1
+push constant 0
+return
+function PythonGame.RefreshScore 0
+push argument 0
+pop pointer 0
+push constant 0
+push constant 32
+call Output.moveCursor 2
+pop temp 0
+push this 3
+call Output.printInt 1
+pop temp 0
+push constant 0
+return
+function PythonGame.PrintStatistics 0
+push argument 0
+pop pointer 0
+push constant 0
+push constant 26
+call Output.moveCursor 2
+pop temp 0
 push constant 6
 call String.new 1
 push constant 83
@@ -157,104 +406,207 @@ pop temp 0
 push this 3
 call Output.printInt 1
 pop temp 0
+push constant 22
 push constant 0
-return
-function PythonGame.dispose 0
-push argument 0
-pop pointer 0
-push this 0
-call Python.dispose 1
+call Output.moveCursor 2
 pop temp 0
-push pointer 0
-call Memory.deAlloc 1
-pop temp 0
-push constant 0
-return
-function PythonGame.GetBuffs 0
-push argument 0
-pop pointer 0
-push this 1
-call Food.GetType 1
-push constant 0
-eq
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push this 5
-push constant 10
-sub
-pop this 5
-label IF_FALSE0
-push this 1
-call Food.GetType 1
-push constant 1
-eq
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push this 0
-call Python.incrementLength 1
-pop temp 0
-label IF_FALSE1
-push this 1
-call Food.GetType 1
-push constant 2
-eq
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push this 3
-push constant 100
-add
-pop this 3
-push this 0
-call Python.incrementLength 1
-pop temp 0
-push this 0
-call Python.incrementLength 1
-pop temp 0
-label IF_FALSE2
-push this 1
-call Food.GetType 1
-push constant 3
-eq
-if-goto IF_TRUE3
-goto IF_FALSE3
-label IF_TRUE3
-push this 3
-push constant 50
-sub
-pop this 3
-label IF_FALSE3
-push this 1
-call Food.GetType 1
-push constant 4
-eq
-if-goto IF_TRUE4
-goto IF_FALSE4
-label IF_TRUE4
-push this 5
-push constant 10
-add
-pop this 5
-push this 0
-call Python.incrementLength 1
-pop temp 0
-label IF_FALSE4
-push this 1
-call Food.GetType 1
 push constant 5
-eq
-if-goto IF_TRUE5
-goto IF_FALSE5
-label IF_TRUE5
-push this 3
-push constant 50
-add
-pop this 3
-push this 0
-call Python.incrementLength 1
+call String.new 1
+push constant 82
+call String.appendChar 2
+push constant 85
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+call Output.printString 1
 pop temp 0
-label IF_FALSE5
+push this 9
+call Output.printInt 1
+pop temp 0
+push constant 22
+push constant 10
+call Output.moveCursor 2
+pop temp 0
+push constant 3
+call String.new 1
+push constant 67
+call String.appendChar 2
+push constant 35
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 6
+call Output.printInt 1
+pop temp 0
+push constant 22
+push constant 20
+call Output.moveCursor 2
+pop temp 0
+push constant 4
+call String.new 1
+push constant 67
+call String.appendChar 2
+push constant 43
+call String.appendChar 2
+push constant 43
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 7
+call Output.printInt 1
+pop temp 0
+push constant 22
+push constant 30
+call Output.moveCursor 2
+pop temp 0
+push constant 2
+call String.new 1
+push constant 67
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 8
+call Output.printInt 1
+pop temp 0
+push constant 22
+push constant 40
+call Output.moveCursor 2
+pop temp 0
+push constant 3
+call String.new 1
+push constant 71
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 10
+call Output.printInt 1
+pop temp 0
+push constant 22
+push constant 50
+call Output.moveCursor 2
+pop temp 0
+push constant 3
+call String.new 1
+push constant 74
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 11
+call Output.printInt 1
+pop temp 0
+push constant 0
+return
+function PythonGame.RefreshRust 0
+push argument 0
+pop pointer 0
+push this 9
+push constant 1
+add
+pop this 9
+push constant 22
+push constant 5
+call Output.moveCursor 2
+pop temp 0
+push this 9
+call Output.printInt 1
+pop temp 0
+push constant 0
+return
+function PythonGame.RefreshSharp 0
+push argument 0
+pop pointer 0
+push this 6
+push constant 1
+add
+pop this 6
+push constant 22
+push constant 13
+call Output.moveCursor 2
+pop temp 0
+push this 6
+call Output.printInt 1
+pop temp 0
+push constant 0
+return
+function PythonGame.RefreshCPP 0
+push argument 0
+pop pointer 0
+push this 7
+push constant 1
+add
+pop this 7
+push constant 22
+push constant 24
+call Output.moveCursor 2
+pop temp 0
+push this 7
+call Output.printInt 1
+pop temp 0
+push constant 0
+return
+function PythonGame.RefreshC 0
+push argument 0
+pop pointer 0
+push this 8
+push constant 1
+add
+pop this 8
+push constant 22
+push constant 32
+call Output.moveCursor 2
+pop temp 0
+push this 8
+call Output.printInt 1
+pop temp 0
+push constant 0
+return
+function PythonGame.RefreshGO 0
+push argument 0
+pop pointer 0
+push this 10
+push constant 1
+add
+pop this 10
+push constant 22
+push constant 43
+call Output.moveCursor 2
+pop temp 0
+push this 10
+call Output.printInt 1
+pop temp 0
+push constant 0
+return
+function PythonGame.RefreshJs 0
+push argument 0
+pop pointer 0
+push this 11
+push constant 1
+add
+pop this 11
+push constant 22
+push constant 53
+call Output.moveCursor 2
+pop temp 0
+push this 11
+call Output.printInt 1
+pop temp 0
 push constant 0
 return
