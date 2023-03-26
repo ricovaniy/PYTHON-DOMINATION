@@ -1,4 +1,4 @@
-class Queue{
+class Queue{ // Classic queue implementation
     field int size;
     field LinkedList head;
     field LinkedList tail;
@@ -13,7 +13,7 @@ class Queue{
         return size;
     }
 
-    method LinkedList Pop(){
+    method LinkedList Pop(){ // Dequeue
         var LinkedList next;
         var LinkedList returned;
         let next = head.GetNext();
@@ -24,7 +24,7 @@ class Queue{
         return returned;
     }
 
-    method void Push(int x, int y){
+    method void Push(int x, int y){ // Enqueue
         var LinkedList new;
         let new = LinkedList.new(x, y);
         do tail.SetNext(new);

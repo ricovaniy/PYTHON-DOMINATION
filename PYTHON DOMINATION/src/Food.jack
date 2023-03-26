@@ -14,23 +14,23 @@ class Food{
         return this;
     }
 
-    method int GetX(){
+    method int GetX(){ // Getter for food X position
         return x;
     }
 
-    method int GetY(){
+    method int GetY(){ // Getter for food Y position
         return y;
     }
 
-    method int GetType(){
+    method int GetType(){ // Getter for food type
         return type;
     }
 
-    method void Place(){
+    method void Place(){ // Food spawn
         do Clear((y * 32) + (x / 16));
         let x = (16 * Random.Range(31));
         let y = 16 * Random.Range(15);
-        while (Memory.peek((x/16)+(y*32)+16384)){
+        while (Memory.peek((x/16)+(y*32)+16384)){ // Make sure food doesn't spawn inside player or other food
             let x = (16 * Random.Range(31));
             let y = 16 * Random.Range(15);
         }
@@ -39,7 +39,7 @@ class Food{
         return;
     }
 
-    method void Draw(){
+    method void Draw(){ // Decides which food to spawn
         let location = (y * 32) + (x / 16);
         if (type = 0) {do drawCPP(location);}
         if (type = 1) {do drawC(location);}
@@ -175,7 +175,7 @@ class Food{
         return;
     } 
 
-    method void Clear(int location){
+    method void Clear(int location){ // Cleans up screen so food doesn't remain
         let memAddress = 16384+location;
         do Memory.poke(memAddress+0, 0);
         do Memory.poke(memAddress+32, 0);

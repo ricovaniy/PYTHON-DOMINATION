@@ -6,38 +6,38 @@ class Python{
     field int size;
     field Queue elements;
     constructor Python new (int x1, int y1, int Asize){
-        let x = x1;
-        let y = y1;
-        let direction = 132;
-        let length = 1;
-        let size = Asize;
-        let elements = Queue.new(x,y);
+        let x = x1; // Set start X
+        let y = y1; // Set start Y
+        let direction = 132; // Set start direction (RIGHT)
+        let length = 1; // Set start length
+        let size = Asize; // Set size of blocks
+        let elements = Queue.new(x,y); // Initialize body
         do DrawSegment(true, x, y);
         return this;
     }
 
-    method void DrawSegment(boolean color, int x, int y){
+    method void DrawSegment(boolean color, int x, int y){ // Draw segment of body with a rectangle
         do Screen.setColor(color);
         do Screen.drawRectangle(x, y, x + size -1, y + size -1);
         return;
     }
 
-    method void DecrementLength(){
+    method void DecrementLength(){ // Decreasing body length
         let length = length - 1;
         return;
     }
 
-    method void incrementLength(){
+    method void incrementLength(){ // Increasing body length
         let length = length + 1;
         return;
     }
     
-    method void SetDirection(int dir){
+    method void SetDirection(int dir){ // Setter for direction
         let direction = dir;
         return;
     }
 
-    method void Draw(){
+    method void Draw(){ // Draws each body element
         var LinkedList tail;
         do elements.Push(x,y);
         while(length<elements.GetSize()){
@@ -48,15 +48,15 @@ class Python{
         return;
     }
 
-    method boolean EatFood(Food f){
+    method boolean EatFood(Food f){ // Collision detection with food
         return (~(x<(f.GetX()-16)) & ~(x>f.GetX())) & (~(y<(f.GetY()-16)) & ~(y>f.GetY()));
     }
 
-    method boolean Crashed(){
+    method boolean Crashed(){ // Collision detection with map borders
         return ((x < 0) | (x > 509) | (y < 0) | (y > 254) | (elements.Contain(x,y)));
     }
     
-    method void Move(){
+    method void Move(){ // Move.
         if (direction = 130) {let x = x - size;} // move LEFT
         if (direction = 131) {let y = y - size;} // move DOWN
         if (direction = 132) {let x = x + size;} // move RIGHT

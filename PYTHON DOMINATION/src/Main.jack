@@ -3,15 +3,15 @@ class Main {
     function void main() {
         var PythonGame game;
         var int key;
-        do Output.moveCursor(11,18);
+        do Output.moveCursor(11,18); // Moves cursor so message prints in the center
         do Output.printString("Press any key to start game!");
         let key = 0;
         while (key = 0){
-            let key = Keyboard.keyPressed();
+            let key = Keyboard.keyPressed(); // Reads key to use it as a seed for random number generation
         }
         do Random.SetSeed(key);
         do Output.moveCursor(11,18);       
-        do Output.printString("                            ");
+        do Output.printString("                            "); // Clears welcome message with whitespaces
         let game = PythonGame.new();
         do game.Run();
         do game.dispose();
