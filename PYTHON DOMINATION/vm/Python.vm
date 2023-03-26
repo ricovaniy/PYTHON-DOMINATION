@@ -78,7 +78,7 @@ pop pointer 0
 push this 5
 push this 0
 push this 1
-call Queue.Push 3
+call Queue.Enqueue 3
 pop temp 0
 label WHILE_EXP0
 push this 3
@@ -88,7 +88,7 @@ lt
 not
 if-goto WHILE_END0
 push this 5
-call Queue.Pop 1
+call Queue.Dequeue 1
 pop local 0
 push pointer 0
 push constant 0

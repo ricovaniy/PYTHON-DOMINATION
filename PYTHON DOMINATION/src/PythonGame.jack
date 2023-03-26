@@ -23,31 +23,14 @@ class PythonGame{
         while(~exit){ // Runs until crashed or Q key is pressed
             let key = Keyboard.keyPressed();
             do python.Move();
-            if (~(python.Crashed()) & ~((key = 81
+            if (~(python.Crashed()) & ~((key = 81))){
                 if ((key>129) & (key < 134)){ // Checks if player is pressing arrow keys
                     do python.SetDirection(key);
                 }
                 if (python.EatFood(food1)){
                     let score = score + Math.max(5, scoreInc); // Makes sure score decrease below 5
                     let scoreInc = 50;
-                    if (food1.GetType() = 0){let time = time - 10;} // C++  increases python speed
-                    if (food1.GetType() = 1){do python.incrementLength();} // C adds 1 segment to body
-                    if (food1.GetType() = 2){ // C# adds 2 segments to body and 100 score points
-                        let score = score + 100;
-                        do python.incrementLength();
-                        do python.incrementLength();
-                    }
-                    if (food1.GetType() = 3){ // JS decreases score by 50
-                        let score = score -50;
-                    }
-                    if (food1.GetType() = 4){ // Rust slows python down and adds 1 body segment
-                        let time = time + 10;
-                        do python.incrementLength();
-                    }
-                    if (food1.GetType() = 5){ // GO adds 50 score points and 1 body segment
-                        let score = score + 50;
-                        do python.incrementLength();
-                    }
+                    do GetBuffs(food1);
                     // Spawn new food after any of previous ones are destroyed
                     do food1.Place();
                     do food2.Place();
@@ -55,24 +38,7 @@ class PythonGame{
                 if (python.EatFood(food2)){ // Same checks for second instance of food
                     let score = score + Math.max(5, scoreInc);
                     let scoreInc = 50;
-                    if (food2.GetType() = 0){let time = time - 10;}
-                    if (food2.GetType() = 1){do python.incrementLength();}
-                    if (food2.GetType() = 2){
-                        let score = score + 100;
-                        do python.incrementLength();
-                        do python.incrementLength();
-                    }
-                    if (food2.GetType() = 3){
-                        let score = score -50;
-                    }
-                    if (food2.GetType() = 4){
-                        let time = time + 10;
-                        do python.incrementLength();
-                    }
-                    if (food2.GetType() = 5){
-                        let score = score + 50;
-                        do python.incrementLength();
-                    }
+                    do GetBuffs(food2);
                     do food1.Place();
                     do food2.Place();
                 }
@@ -94,6 +60,28 @@ class PythonGame{
     method void dispose(){
         do python.dispose();
         do Memory.deAlloc(this);
+        return;
+    }
+
+    method void GetBuffs(Food food){
+        if (food1.GetType() = 0){let time = time - 10;} // C++  increases python speed
+        if (food1.GetType() = 1){do python.incrementLength();} // C adds 1 segment to body
+        if (food1.GetType() = 2){ // C# adds 2 segments to body and 100 score points
+            let score = score + 100;
+            do python.incrementLength();
+            do python.incrementLength();
+        }
+        if (food1.GetType() = 3){ // JS decreases score by 50
+            let score = score -50;
+        }
+        if (food1.GetType() = 4){ // Rust slows python down and adds 1 body segment
+            let time = time + 10;
+            do python.incrementLength();
+        }
+        if (food1.GetType() = 5){ // GO adds 50 score points and 1 body segment
+            let score = score + 50;
+            do python.incrementLength();
+        }        
         return;
     }
 }

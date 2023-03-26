@@ -13,7 +13,7 @@ class Queue{ // Classic queue implementation
         return size;
     }
 
-    method LinkedList Pop(){ // Dequeue
+    method LinkedList Dequeue(){
         var LinkedList next;
         var LinkedList returned;
         let next = head.GetNext();
@@ -24,7 +24,7 @@ class Queue{ // Classic queue implementation
         return returned;
     }
 
-    method void Push(int x, int y){ // Enqueue
+    method void Enqueue(int x, int y){
         var LinkedList new;
         let new = LinkedList.new(x, y);
         do tail.SetNext(new);

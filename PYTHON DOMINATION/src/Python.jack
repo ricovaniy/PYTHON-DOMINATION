@@ -39,9 +39,9 @@ class Python{
 
     method void Draw(){ // Draws each body element
         var LinkedList tail;
-        do elements.Push(x,y);
+        do elements.Enqueue(x,y);
         while(length<elements.GetSize()){
-            let tail = elements.Pop();
+            let tail = elements.Dequeue();
             do DrawSegment(false, tail.GetX(), tail.GetY());
         }
         do DrawSegment(true, x, y);

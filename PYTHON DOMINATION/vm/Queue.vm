@@ -17,7 +17,7 @@ push argument 0
 pop pointer 0
 push this 0
 return
-function Queue.Pop 2
+function Queue.Dequeue 2
 push argument 0
 pop pointer 0
 push this 1
@@ -40,7 +40,7 @@ push local 0
 pop this 1
 push local 1
 return
-function Queue.Push 1
+function Queue.Enqueue 1
 push argument 0
 pop pointer 0
 push argument 1
